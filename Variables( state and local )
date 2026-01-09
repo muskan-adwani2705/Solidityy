@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Basics
+{
+    string name;
+    uint a;
+
+    constructor() 
+    {
+         name = "Muskan";
+         a = 10;
+    }
+
+    function getName() public view returns (string memory )
+    {
+         return name;
+    }
+
+    uint public age;
+
+    function local() public pure returns (uint)
+    {
+        uint age1 = 10;
+        return age1 + 1;
+    }
+}
