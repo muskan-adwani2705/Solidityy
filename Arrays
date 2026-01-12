@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Arrays{
+uint[4] public arr = [10,20,30,40];
+    
+    uint[] public arr2;
+
+    function pushElement(uint item) public 
+    {
+        arr2.push(item);
+    }
+
+   function len() public view returns (uint)
+   {
+      return arr2.length;
+   }
+
+   function popElement() public 
+   {
+      arr2.pop();
+   }
+}
