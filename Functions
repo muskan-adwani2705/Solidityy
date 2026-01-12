@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract firstFunction{
+   // uint age = 22;
+    uint public age = 22 ;  //when added public to state variable automatic setter function is created
+    // function getter() public view returns (uint) 
+    // {
+    //     return age;
+    // }
+
+    function setter(uint newage) public
+    {
+       // age = age + 1;
+
+       age = newage ;
+    }
+}
