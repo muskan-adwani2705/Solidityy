@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract structs{
+
+    struct Person{
+        string name;
+        uint age;
+        address HomeAdd ;
+    }
+
+    // Person public p1;
+
+    // constructor(){
+    //     p1 = Person("Muskan Adwani" , 21 , msg.sender);
+    // }
+
+    // function getPerson() public view returns(string memory , uint , address)
+    // {
+    //     return (p1.name , p1.age , p1.HomeAdd);
+    // }
+
+    mapping (address => Person) public persons;
+
+    function setPerson(string memory _name , uint age) public {
+        persons[msg.sender] = Person({
+            name: _name,
+            age: age,
+            HomeAdd: msg.sender
+        });
+    }
+
+    function getPerson() public view returns(string memory , uint , address)
+    {
+        Person memory person = persons[msg.sender];
+        return (person.name, person.age, person.HomeAdd);
+    }
+}
