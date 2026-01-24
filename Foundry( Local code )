@@ -1,0 +1,75 @@
+//MuskanToken.sol
+
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.13;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import {console} from "forge-std/console.sol";
+contract MuskanToken is ERC20 , Ownable {
+    // uint private counter;
+
+    // constructor(uint _counter){
+    //     counter = _counter;
+    // }
+
+    // function increase() public {
+    //     counter++;
+    // }
+
+    // function decrease() public {
+    //     counter--;
+    // }
+
+    // function getCount() public view returns(uint256){
+    //     return counter;
+    // }
+
+    // uint256 public number;
+
+    constructor() 
+        ERC20("MuskanToken" , "MIK") 
+        Ownable(msg.sender){
+    }
+
+    function mint(address to , uint256 amount) public onlyOwner(){
+        console.log("hi , there");
+        _mint(to , amount);
+        
+    }
+ }
+
+//MuskanToken.t.sol
+
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.13;
+
+import "forge-std/Test.sol";
+
+import "../src/MuskanToken.sol";
+
+contract TestMuskanToken is Test {
+    MuskanToken public c;
+
+    function setUp() public {
+        c = new MuskanToken();
+    }
+
+    // function testInce() public{
+    //     c.increase();
+    //     c.increase();
+    //     assertEq(c.getCount(), 7 , "ok");
+
+    // }
+    // function testDec() public{
+    //     c.decrease();
+    //     c.decrease();
+    //     assertEq(c.getCount(), 3 , "ok");
+    // }
+    function testMint() public{
+        c.mint(address(this), 100);
+        assertEq(c.balanceOf(address(this)), 100 , "ok");
+    }
+
+}
+
