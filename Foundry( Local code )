@@ -40,7 +40,6 @@ contract MuskanToken is ERC20 , Ownable {
  }
 
 //MuskanToken.t.sol
-
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
@@ -71,5 +70,36 @@ contract TestMuskanToken is Test {
         assertEq(c.balanceOf(address(this)), 100 , "ok");
     }
 
+    function testTransfer() public {
+        c.mint(address(this), 100);
+        c.transfer(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da , 50);
+
+        assertEq(c.balanceOf(address(this)) , 50);
+        assertEq(c.balanceOf(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da), 50);
+
+        //to change the sender vm.prank(address of other) is used;
+        vm.prank(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da);
+        c.transfer(address(this), 50);
+
+        assertEq(c.balanceOf(address(this)) , 100);
+        assertEq(c.balanceOf(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da), 0);
+    }
+
+    function testApproval() public {
+        c.mint(address(this), 100);
+
+        c.approve(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da, 10);
+
+        assertEq(c.allowance(address(this) , 0x7940e809c14728D9EAB58a1B2746A32838b0F8Da), 10);
+
+        vm.prank(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da);
+        c.transferFrom(address(this) , 0x7940e809c14728D9EAB58a1B2746A32838b0F8Da , 5);
+
+        assertEq(c.balanceOf(address(this)), 95 , "ok");
+        assertEq(c.balanceOf(0x7940e809c14728D9EAB58a1B2746A32838b0F8Da ), 5 , "ok" );
+        assertEq(c.allowance(address(this) , 0x7940e809c14728D9EAB58a1B2746A32838b0F8Da), 5);
+    }
 }
+
+
 
